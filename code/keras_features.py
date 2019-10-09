@@ -11,7 +11,7 @@ from keras.applications.xception import preprocess_input as preprocess_xception
 x_train = np.load('../utils/images_full.npy')
 
 x_train_features = []
-model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling=None)
+model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='avg')
 
 print("\nExtracting features...")
 for i in tqdm(x_train):
@@ -23,6 +23,6 @@ for i in tqdm(x_train):
     x_train_features.append(model.predict(img_data).flatten())
 
 np.save("../utils/features_full.npy", x_train_features) #esporto formato npy
-print('features saved...')
+print('Features saved...')
 
 print('Task terminated')

@@ -9,7 +9,7 @@ import joblib as joblib
 from keras.applications.xception import Xception
 from keras.applications.xception import preprocess_input as preprocess_xception
 
-model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling=None)
+model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='avg')
 clf = joblib.load('../utils/svm_model.sav')
 def create_tracker(n):
     tracker_types = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'CSRT']
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     # load the model from disk
     #clf = joblib.load('./KNeighbors_model_2.sav')
     START = 1
-    width, height = 50, 50
+    width, height = 60, 60
     # Read video
     video = cv2.VideoCapture("../video/test_video.mp4")
  
@@ -154,3 +154,4 @@ if __name__ == '__main__':
 
 video.release()
 cv2.destroyAllWindows()
+print('Video saved as video/output_video.avi')
