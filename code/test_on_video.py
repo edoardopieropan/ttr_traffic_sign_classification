@@ -99,7 +99,7 @@ if __name__ == '__main__':
     
 
     video.set(cv2.CAP_PROP_POS_FRAMES, START)
-    out = cv2.VideoWriter('../video/output_video.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (1920, 1080))
+    out = cv2.VideoWriter('../video/output_video.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 30, (1920, 1080))
 
     while (video.isOpened()):
         # Read a new frame

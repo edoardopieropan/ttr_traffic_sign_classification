@@ -22,6 +22,9 @@ for folder in tqdm(foldernames): # loop through all the files and folders
         images.append(np.asarray(image))
         labels.append(current_label)
 
+if not os.path.exists('../utils/'):
+    os.makedirs('../utils/')
+    
 np.save("../utils/labels_full.npy", labels) #esporto formato npy
 print('labels saved...')
 

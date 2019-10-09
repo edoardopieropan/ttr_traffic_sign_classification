@@ -10,6 +10,7 @@ from sklearn.svm import SVC
 x = np.load('../utils/features_full.npy')
 y = np.load('../utils/labels_full.npy')
 
+print('Training classifier...')
 clf = SVC(kernel="rbf", gamma='auto', C=100, probability=True)
 clf.fit(x, y)
 
