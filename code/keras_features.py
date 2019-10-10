@@ -8,7 +8,7 @@ from tqdm import tqdm
 from keras.applications.xception import Xception
 from keras.applications.xception import preprocess_input as preprocess_xception
 
-x_train = np.load('../utils/images_full.npy')
+x_train = np.load('../utils/images_full.npy', allow_pickle=True)
 
 x_train_features = []
 model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='avg')

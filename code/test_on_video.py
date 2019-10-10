@@ -9,7 +9,7 @@ import joblib as joblib
 from keras.applications.xception import Xception
 from keras.applications.xception import preprocess_input as preprocess_xception
 
-model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='avg')
+model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='max')
 clf = joblib.load('../utils/svm_model.sav')
 def create_tracker(n):
     tracker_types = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'CSRT']

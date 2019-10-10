@@ -9,8 +9,9 @@ import os
 
 labels = []
 images = []
-width, height = 60, 60
+width, height = 71, 71
 
+print('\nReading dataset...')
 foldernames= sorted(os.listdir("../dataset"))
 for folder in tqdm(foldernames): # loop through all the files and folders
     current_label = folder
