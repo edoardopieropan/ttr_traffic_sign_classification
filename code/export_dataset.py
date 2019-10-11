@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np
 from tqdm import tqdm
 import os
+from data_augmentation import augment_data
 
 labels = []
 images = []
@@ -22,6 +23,10 @@ for folder in tqdm(foldernames): # loop through all the files and folders
         image = image.resize((width, height), Image.NEAREST) #resize delle immagini
         images.append(np.asarray(image))
         labels.append(current_label)
+        augmented_images = augment_data(image, True, True)
+        images.extend(augmented_images)
+        for ai in range(len(augmented_images)):
+            labels.append(current_label)
 
 if not os.path.exists('../utils/'):
     os.makedirs('../utils/')

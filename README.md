@@ -2,6 +2,8 @@
 ### __University of Verona__
 A simple Pattern Recognition project. The traffic signs we used are the following.
 ![signs classes](other/classes.png)
+## How it works
+We used two datasets for training our SVM model. The datasets where not enough large, so we used a data augmenter (file in `code` folder named `data_augmentation`).
 ## Setup & Run
 Download the repository then extract it where you prefer. Using the `cd` command go to the repository path.
 You can now use `python3` to run the scripts contained in the `code` folder. <br>
