@@ -5,7 +5,7 @@ from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import ImageDataGenerator
 
-def augment_data(img, zoom, brightness):
+def augment_data(img, quantity, zoom, brightness):
     return_array = []
 
     if zoom:
@@ -18,7 +18,7 @@ def augment_data(img, zoom, brightness):
         # prepare iterator
         it = datagen.flow(samples, batch_size=1)
         # generate samples and plot
-        for i in range(9):
+        for i in range(quantity):
             # generate batch of images
             batch = it.next()
             # convert to unsigned integers for viewing
@@ -36,7 +36,7 @@ def augment_data(img, zoom, brightness):
         # prepare iterator
         it = datagen.flow(samples, batch_size=1)
         # generate samples and plot
-        for i in range(9):
+        for i in range(quantity):
             # generate batch of images
             batch = it.next()
             # convert to unsigned integers for viewing

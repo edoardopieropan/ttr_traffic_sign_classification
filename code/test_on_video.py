@@ -6,11 +6,14 @@ import cv2
 import numpy as np
 from PIL import Image
 import joblib as joblib
+from sklearn.decomposition import PCA
 from keras.applications.xception import Xception
 from keras.applications.xception import preprocess_input as preprocess_xception
 
 model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='max')
 clf = joblib.load('../utils/svm_model.sav')
+pca = joblib.load('../utils/pca.sav')
+
 def create_tracker(n):
     tracker_types = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'CSRT']
     tracker_type = tracker_types[n]
@@ -45,7 +48,9 @@ def predict_signal(frame, bbox):
     img_data = preprocess_xception(img_data)
     img_feature = model.predict(img_data).flatten()
     #class_probabilities = clf.predict_proba(img_feature.reshape(1,-1))
-    predicted_labels = clf.predict(img_feature.reshape(1,-1))
+    
+    img_feature = pca.transform(img_feature.reshape(1, -1))
+    predicted_labels = clf.predict(img_feature)
     
     predicted_labels_str = str(predicted_labels).replace("[","")
     predicted_labels_str = predicted_labels_str.replace("'","")
@@ -62,7 +67,7 @@ def predict_signal(frame, bbox):
 if __name__ == '__main__':
     # load the model from disk
     #clf = joblib.load('./KNeighbors_model_2.sav')
-    START = 1
+    START = 300
     width, height = 60, 60
     # Read video
     video = cv2.VideoCapture("../video/test_video.mp4")

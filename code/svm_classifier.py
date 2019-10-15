@@ -14,8 +14,10 @@ y = np.load('../utils/labels_full.npy')
 
 # PCA
 print('Using PCA...')
-pca = PCA(n_components=1000)
+pca = PCA(n_components=800)
 x = pca.fit_transform(x)
+joblib.dump(pca, '../utils/pca.sav')
+print('PCA instance saved...')
 
 clf = SVC(kernel="rbf", gamma='auto', C=100, probability=False)
 print('Training classifier...')
