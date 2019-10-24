@@ -3,7 +3,8 @@ Permette il savataggio delle bounding-box dal video. L'aggiunta di una bbox si e
 '''
 
 import cv2
- 
+import sys
+
 # Read video
 video = cv2.VideoCapture("../video/test_video.mp4")
 
@@ -38,4 +39,4 @@ with open("../utils/bbox.txt","w+") as f:
             f.write(str(frame_counter)+" "+str(bbox)+"\n")
 
         # Exit if ESC pressed
-        else if n == 27 : break
+        elif n == 27 : break

@@ -11,8 +11,8 @@ from keras.applications.xception import Xception
 from keras.applications.xception import preprocess_input as preprocess_xception
 
 model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='max')
-clf = joblib.load('../utils/svm_model.sav')
-pca = joblib.load('../utils/pca.sav')
+clf = joblib.load('../utils/svm_model_classes.sav')
+#pca = joblib.load('../utils/pca.sav')
 
 def create_tracker(n):
     tracker_types = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'CSRT']
@@ -49,7 +49,8 @@ def predict_signal(frame, bbox):
     img_feature = model.predict(img_data).flatten()
     #class_probabilities = clf.predict_proba(img_feature.reshape(1,-1))
     
-    img_feature = pca.transform(img_feature.reshape(1, -1))
+    #img_feature = pca.transform(img_feature.reshape(1, -1))
+    img_feature = img_feature.reshape(1, -1)
     predicted_labels = clf.predict(img_feature)
     
     predicted_labels_str = str(predicted_labels).replace("[","")
@@ -67,8 +68,8 @@ def predict_signal(frame, bbox):
 if __name__ == '__main__':
     # load the model from disk
     #clf = joblib.load('./KNeighbors_model_2.sav')
-    START = 300
-    width, height = 60, 60
+    START = 0
+    width, height = 71, 71
     # Read video
     video = cv2.VideoCapture("../video/test_video.mp4")
  
@@ -116,7 +117,7 @@ if __name__ == '__main__':
             tracker=create_tracker(4)
             tracker.init(frame, kv[counter])
             trackers.append(tracker)
-            c[c_count]=5
+            c[c_count]=10
             c_count+=1
 
         # Start timer

@@ -2,3 +2,4 @@
 __pycache__
 utils/
 video/output_video.avi
+dataset_t/
