@@ -30,13 +30,13 @@ class_dictionary = {
     }
 
 print('\nReading dataset...')
-foldernames= sorted(os.listdir("../dataset_t"))
+foldernames= sorted(os.listdir("../dataset"))
 for folder in tqdm(foldernames): # loop through all the files and folders
     current_label = int(folder)
-    imagenames = os.listdir("../dataset_t/"+folder)
+    imagenames = os.listdir("../dataset/"+folder)
     folder_label = class_dictionary[folder]
     for img in imagenames:
-        image = Image.open("../dataset_t/"+folder+"/"+img)
+        image = Image.open("../dataset/"+folder+"/"+img)
         image = image.resize((width, height), Image.NEAREST) #resize delle immagini
         images.append(np.asarray(image))
         labels.append(current_label)
