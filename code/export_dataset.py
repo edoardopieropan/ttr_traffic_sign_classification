@@ -13,12 +13,26 @@ class_labels = []
 images = []
 width, height = 71, 71
 
-class_dictionary = { '0':0, '4':0, '2':1, '5':1, '3':2, '8':2, '9':2, '6':3, '7':3, '1':4 }
+to_flip = ['06', '09', '12', '13']
+
+howmuch_augment_class = { 
+    '00':3, '01':3, '02':3, '03':3, '04':3,
+    '05':3, '06':3, '07':3, '08':3, '09':3, 
+    '10':3, '11':6, '12':6, '13':6, '14':2, 
+    '15':2, '16':2
+    }
+    
+class_dictionary = { 
+    '00':4, '01':4, '02':4, '03':0, '04':0,
+    '05':0, '06':3, '07':3, '08':3, '09':3, 
+    '10':3, '11':1, '12':1, '13':1, '14':2, 
+    '15':2, '16':2
+    }
 
 print('\nReading dataset...')
 foldernames= sorted(os.listdir("../dataset_t"))
 for folder in tqdm(foldernames): # loop through all the files and folders
-    current_label = folder
+    current_label = int(folder)
     imagenames = os.listdir("../dataset_t/"+folder)
     folder_label = class_dictionary[folder]
     for img in imagenames:
@@ -27,7 +41,7 @@ for folder in tqdm(foldernames): # loop through all the files and folders
         images.append(np.asarray(image))
         labels.append(current_label)
         class_labels.append(folder_label)
-        augmented_images = augment_data(image, 2, True, True, True)
+        augmented_images = augment_data(image, howmuch_augment_class[folder], True, True, (folder in to_flip))
         images.extend(augmented_images)
         for ai in range(len(augmented_images)):
             labels.append(current_label)

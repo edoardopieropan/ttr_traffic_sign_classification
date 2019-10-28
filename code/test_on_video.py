@@ -11,8 +11,8 @@ from keras.applications.xception import Xception
 from keras.applications.xception import preprocess_input as preprocess_xception
 
 model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='max')
-clf = joblib.load('../utils/svm_model_classes.sav')
-#pca = joblib.load('../utils/pca.sav')
+clf_classes = joblib.load('../utils/svm_model_classes.sav')
+pca = joblib.load('../utils/pca.sav')
 
 def create_tracker(n):
     tracker_types = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'CSRT']
@@ -49,13 +49,20 @@ def predict_signal(frame, bbox):
     img_feature = model.predict(img_data).flatten()
     #class_probabilities = clf.predict_proba(img_feature.reshape(1,-1))
     
-    #img_feature = pca.transform(img_feature.reshape(1, -1))
-    img_feature = img_feature.reshape(1, -1)
+    img_feature = pca.transform(img_feature.reshape(1, -1))
+    predicted_class_labels = clf_classes.predict(img_feature)
+    predicted_class_str = str(predicted_class_labels).replace("[","")
+    predicted_class_str = predicted_class_str.replace("'","")
+    predicted_class_str = predicted_class_str.replace("]","")
+
+    clf = joblib.load('../utils/svm_model_'+predicted_class_str+'.sav')
     predicted_labels = clf.predict(img_feature)
-    
     predicted_labels_str = str(predicted_labels).replace("[","")
     predicted_labels_str = predicted_labels_str.replace("'","")
     predicted_labels_str = predicted_labels_str.replace("]","")
+
+    if int(predicted_labels_str) < 10:
+        predicted_labels_str = '0'+predicted_labels_str
     sample_image = Image.open("../samples/"+predicted_labels_str+".jpg")
     sample_image = sample_image.convert("RGB")
     b, g, r = sample_image.split()
@@ -66,10 +73,9 @@ def predict_signal(frame, bbox):
     return np.array(frame)
 
 if __name__ == '__main__':
-    # load the model from disk
-    #clf = joblib.load('./KNeighbors_model_2.sav')
-    START = 0
+    START = 0 #starting frame
     width, height = 71, 71
+    
     # Read video
     video = cv2.VideoCapture("../video/test_video.mp4")
  
@@ -144,6 +150,7 @@ if __name__ == '__main__':
                 i=c_del+trackers.index(t)
             except:
                 print("An exception occurred")
+                break
 
             if c[i] != 0:
                 c[i]-=1
@@ -160,4 +167,6 @@ if __name__ == '__main__':
 
 video.release()
 cv2.destroyAllWindows()
+out.release()
 print('Video saved as video/output_video.avi')
+print('Task terminated')

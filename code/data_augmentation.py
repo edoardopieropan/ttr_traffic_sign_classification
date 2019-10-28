@@ -15,7 +15,7 @@ def augment_data(img, quantity, zoom, brightness, flip):
         # expand dimension to one sample
         samples = expand_dims(data, 0)
         # create image data augmentation generator
-        datagen = ImageDataGenerator(zoom_range=[0.5,1.5])
+        datagen = ImageDataGenerator(zoom_range=[0.6,0.9])
         # prepare iterator
         it = datagen.flow(samples, batch_size=1)
         # generate samples and plot
@@ -47,7 +47,8 @@ def augment_data(img, quantity, zoom, brightness, flip):
 
     if flip:
         open_cv_image = numpy.array(img) 
-        img = open_cv_image[:, :, ::-1].copy() 
-        return_array.append(numpy.asarray(cv2.flip(img, 1)))
+        img = open_cv_image[:, :, ::-1].copy()
+        img = cv2.flip(img, 1)
+        return_array.append(numpy.asarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))
 
     return return_array
