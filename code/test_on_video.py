@@ -123,7 +123,7 @@ if __name__ == '__main__':
             tracker=create_tracker(4)
             tracker.init(frame, kv[counter])
             trackers.append(tracker)
-            c[c_count]=10
+            c[c_count]=5
             c_count+=1
 
         # Start timer
