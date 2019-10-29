@@ -19,7 +19,7 @@ print('Using PCA...')
 x = pca.transform(x)
 
 print("Calculating cross validation score...")
-y_pred = cross_val_predict(clf, x, y_class, cv=3)
+y_pred = cross_val_predict(clf, x, y_class, cv=10)
 conf_mat = confusion_matrix(y_class, y_pred)
 import seaborn as sn
 import pandas as pd
@@ -34,7 +34,9 @@ plt.show()
 for i in range(max(y_class)+1):
     print("Calculating confusion matrix for class "+str(i)+"...")
     clf = joblib.load('../utils/svm_model_'+str(i)+'.sav')
-    y_pred = cross_val_predict(clf, x[y_class == i], y[y_class == i], cv=3)
-    conf_mat = confusion_matrix(y[y_class == i], y_pred)
+    x_temp = x[y_class == i]
+    y_temp = y[y_class == i]
+    y_pred = cross_val_predict(clf, x_temp, y_temp, cv=10)
+    conf_mat = confusion_matrix(y_temp, y_pred)
     print("Confusion matrix class "+str(i)+":")
     print(conf_mat)

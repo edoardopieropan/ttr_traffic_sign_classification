@@ -29,6 +29,7 @@ print('Model saved...')
 
 print('Training sub-classifiers...')
 for i in tqdm(range(max(y_class)+1)):
+    clf = SVC(kernel="rbf", C=100, gamma='auto', probability=False)
     x_temp = x[y_class == i]
     y_temp = y[y_class == i]
     clf.fit(x_temp, y_temp)

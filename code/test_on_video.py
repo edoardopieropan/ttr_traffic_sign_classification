@@ -73,7 +73,7 @@ def predict_signal(frame, bbox):
     return np.array(frame)
 
 if __name__ == '__main__':
-    START = 0 #starting frame
+    START = 1 #starting frame
     width, height = 71, 71
     
     # Read video
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     
 
     video.set(cv2.CAP_PROP_POS_FRAMES, START)
-    out = cv2.VideoWriter('../video/output_video.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 30, (1920, 1080))
+    out = cv2.VideoWriter('../video/output_video.avi',cv2.VideoWriter_fourcc(*"MJPG"), 30, (1920, 1080))
 
     while (video.isOpened()):
         # Read a new frame
@@ -165,8 +165,8 @@ if __name__ == '__main__':
         k = cv2.waitKey(1) & 0xff
         if k == 27 : break
 
-video.release()
-cv2.destroyAllWindows()
-out.release()
-print('Video saved as video/output_video.avi')
-print('Task terminated')
+    video.release()
+    out.release()
+    print('Video saved as video/output_video.avi')
+    cv2.destroyAllWindows()
+    print('Task terminated')
