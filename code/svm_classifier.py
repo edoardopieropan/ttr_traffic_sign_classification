@@ -14,11 +14,11 @@ y = np.load('../utils/labels_full.npy')
 y_class = np.load('../utils/class_labels_full.npy')
 
 # PCA
-print('Using PCA...')
-pca = PCA(n_components=1000)
-x = pca.fit_transform(x)
-joblib.dump(pca, '../utils/pca.sav')
-print('PCA instance saved...')
+# print('Using PCA...')
+# pca = PCA(n_components=1000)
+# x = pca.fit_transform(x)
+# joblib.dump(pca, '../utils/pca.sav')
+# print('PCA instance saved...')
 
 clf = SVC(kernel="rbf", C=100, gamma='auto', probability=False)
 print('Training classifier...')
@@ -28,7 +28,7 @@ joblib.dump(clf, '../utils/svm_model_classes.sav')
 print('Model saved...')
 
 print('Training sub-classifiers...')
-for i in tqdm(range(max(y_class)+1)):
+for i in tqdm(range(max(y_class))):
     clf = SVC(kernel="rbf", C=100, gamma='auto', probability=False)
     x_temp = x[y_class == i]
     y_temp = y[y_class == i]

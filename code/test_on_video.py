@@ -49,27 +49,40 @@ def predict_signal(frame, bbox):
     img_feature = model.predict(img_data).flatten()
     #class_probabilities = clf.predict_proba(img_feature.reshape(1,-1))
     
-    img_feature = pca.transform(img_feature.reshape(1, -1))
-    predicted_class_labels = clf_classes.predict(img_feature)
-    predicted_class_str = str(predicted_class_labels).replace("[","")
-    predicted_class_str = predicted_class_str.replace("'","")
-    predicted_class_str = predicted_class_str.replace("]","")
+    # img_feature = pca.transform(img_feature.reshape(1, -1))
+    # predicted_class_labels = clf_classes.predict(img_feature)
+    # predicted_class_str = str(predicted_class_labels).replace("[","")
+    # predicted_class_str = predicted_class_str.replace("'","")
+    # predicted_class_str = predicted_class_str.replace("]","")
+    class_probabilities = clf_classes.predict_proba(img_feature.reshape(1,-1))
+    print(class_probabilities)
 
-    clf = joblib.load('../utils/svm_model_'+predicted_class_str+'.sav')
-    predicted_labels = clf.predict(img_feature)
-    predicted_labels_str = str(predicted_labels).replace("[","")
-    predicted_labels_str = predicted_labels_str.replace("'","")
-    predicted_labels_str = predicted_labels_str.replace("]","")
+    predicted_class_str = str(np.where(class_probabilities[0] == max(class_probabilities[0]))[0][0])
 
-    if int(predicted_labels_str) < 10:
-        predicted_labels_str = '0'+predicted_labels_str
-    sample_image = Image.open("../samples/"+predicted_labels_str+".jpg")
-    sample_image = sample_image.convert("RGB")
-    b, g, r = sample_image.split()
-    sample_image = Image.merge("RGB", (r, g, b))
-    frame = Image.fromarray(frame)
-    frame.paste(sample_image , p2)
+    if predicted_class_str != '5':
+        clf = joblib.load('../utils/svm_model_'+predicted_class_str+'.sav')
+        # predicted_labels = clf.predict(img_feature)
+        # predicted_labels_str = str(predicted_labels).replace("[","")
+        # predicted_labels_str = predicted_labels_str.replace("'","")
+        # predicted_labels_str = predicted_labels_str.replace("]","")
+        probabilities = clf.predict_proba(img_feature.reshape(1,-1))
+        print(probabilities)
+        predicted_labels_str = str(np.where(probabilities[0] == max(probabilities[0]))[0][0])
 
+        sample_image = Image.open("../samples/"+predicted_class_str+"/"+predicted_labels_str+".jpg")
+
+        sample_image = sample_image.convert("RGB")
+        b, g, r = sample_image.split()
+        sample_image = Image.merge("RGB", (r, g, b))
+        frame = Image.fromarray(frame)
+        frame.paste(sample_image , p2)
+    else:
+        sample_image = Image.open("../samples/bg.jpg")
+        sample_image = sample_image.convert("RGB")
+        b, g, r = sample_image.split()
+        sample_image = Image.merge("RGB", (r, g, b))
+        frame = Image.fromarray(frame)
+        frame.paste(sample_image , p2)
     return np.array(frame)
 
 if __name__ == '__main__':
@@ -91,7 +104,7 @@ if __name__ == '__main__':
     images = []
 
     # Read bbox
-    with open("../utils/bbox.txt") as f:
+    with open("../video/bbox.txt") as f:
         for line in f.readlines():
             splitted = line.split(" ", 1)
             splitted[1] = splitted[1].replace("\n","")
@@ -105,14 +118,15 @@ if __name__ == '__main__':
  
     # Read first frame.
     ok, frame = video.read()
+    frame_width = int(video.get(3))
+    frame_height = int(video.get(4))
     if not ok:
         print('Cannot read video file')
         sys.exit()
     
 
     video.set(cv2.CAP_PROP_POS_FRAMES, START)
-    out = cv2.VideoWriter('../video/output_video.avi',cv2.VideoWriter_fourcc(*"MJPG"), 30, (1920, 1080))
-
+    out = cv2.VideoWriter('../video/output_video.mp4',cv2.VideoWriter_fourcc(*'mp4v'), 29, (frame_width,frame_height))
     while (video.isOpened()):
         # Read a new frame
         ok, frame = video.read()
@@ -158,15 +172,15 @@ if __name__ == '__main__':
                     trackers.remove(t)
                     c_del+=1
                     
+        out.write(frame)
         # Display result
         cv2.imshow("Tracking", frame)
-        out.write(frame)
         # Exit if ESC pressed
         k = cv2.waitKey(1) & 0xff
         if k == 27 : break
 
     video.release()
     out.release()
-    print('Video saved as video/output_video.avi')
+    print('Video saved as video/output_video.mp4')
     cv2.destroyAllWindows()
     print('Task terminated')

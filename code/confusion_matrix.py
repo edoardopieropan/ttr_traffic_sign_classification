@@ -19,7 +19,7 @@ print('Using PCA...')
 x = pca.transform(x)
 
 print("Calculating cross validation score...")
-y_pred = cross_val_predict(clf, x, y_class, cv=10)
+y_pred = cross_val_predict(clf, x, y_class, cv=2)
 conf_mat = confusion_matrix(y_class, y_pred)
 import seaborn as sn
 import pandas as pd
@@ -28,7 +28,7 @@ df_cm = pd.DataFrame(conf_mat, index = range(max(y_class)+1),
 print('Confusion matrix:')
 print(conf_mat)
 plt.figure(figsize = (10,7))
-sn.heatmap(df_cm, annot=True)
+sn.heatmap(df_cm, annot=True, cmap="magma", fmt='g')
 plt.show()
 
 for i in range(max(y_class)+1):
@@ -36,7 +36,7 @@ for i in range(max(y_class)+1):
     clf = joblib.load('../utils/svm_model_'+str(i)+'.sav')
     x_temp = x[y_class == i]
     y_temp = y[y_class == i]
-    y_pred = cross_val_predict(clf, x_temp, y_temp, cv=10)
+    y_pred = cross_val_predict(clf, x_temp, y_temp, cv=5)
     conf_mat = confusion_matrix(y_temp, y_pred)
     print("Confusion matrix class "+str(i)+":")
     print(conf_mat)
