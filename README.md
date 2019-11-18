@@ -1,11 +1,11 @@
 #  __Traffic Sign Classification__
 ### __University of Verona__
-A simple Pattern Recognition project. The traffic signs we used are the following.
-![signs classes](other/classes.png)
+A simple Pattern Recognition project without using CNN methods. The traffic signs we work on are the following.
+![signs classes](other/classes.jpg)
 ## How it works
-We used two datasets for training our SVM model. The datasets where not enough large, so we used a data augmenter (file in `code` folder named `data_augmentation`).
+We used multiple datasets for training our SVM model (German Traffic Sign Dataset, BelgiumTS Dataset, Spanish Traffic Sign Dataset). The sign images where not enough, so we used data augmentation (file in `code` folder named `data_augmentation`) in some cases.
 ## Setup & Run
-Download the repository then extract it where you prefer. Using the `cd` command go to the repository path.
+Download the repository then extract it. Using the `cd` command go to the repository path.
 You can now use `python3` to run the scripts contained in the `code` folder. <br>
 At first you need to extract the images contained in the `dataset` folder and convert it to `.npy` file. To do this simply run
 ```
@@ -21,15 +21,27 @@ Now we can train our __SVM__ classifier with the previosly extracted features by
 ```
 python3 code/svm_classifier.py
 ```
-It will save a `.sav` file containing the classifier.
-Now we have the traffic signs classifier, you can just use it by passing traffic sign images, it will give you the predicted class (type int from 0 to 10). <br>
-We tested it on a video (inside the `video` folder, it's `test_video.mp4`). To try it youself you need to selet the first frame containing the sign's bouding-box running
-```
-python3 code/TODO.py
-``` 
-NOTE: press __n__ to stop the video and let you select the boungin-box, then press __enter__ to continue through the video.<br><br>
-Once the video is over you can watch the classifier at work by running
+It will save five `.sav` file containing the classifier for the superclass and four for the subclasses (one for each superclass).<br>
+We tested it on a video (inside the `video` folder, it's `test_video.mp4`). Run this command to try it:
 ```
 python3 code/test_on_video.py
-```
-At the end it will save the output video inside the `video` folder as `output_video.avi`.
+``` 
+NOTE: to try other videos you need to run `create_bbox.py` and with the key __'n'__ add only the first frame of the signal, the others will be trakced automatically.
+<br>
+Finally it will save the output video inside the `video` folder as `output_video.mp4`.
+<br><br>
+Another test is `test_on_images.py` that will cicle into the `test` folder and find the signals using a __sliding window__. Results will be stored in the folder `sliding_windows_results`.
+
+## License
+Before use it I invite you to read the LICENSE <br >
+This file is distributed under the terms of the __GNU General Public License v3.0__<br >
+Visit <http://www.gnu.org/licenses/> for further information.<br >
+
+## References
+
+***Tecniche e teorie del riconoscimento - Visual Computing*** <br >
+A.Y. 2018/2019 <br >
+University of Verona (Italy) <br > <br >
+Repository Author: <br >
+**Edoardo Pieropan** <br>
+**Gianluca Pavan**
