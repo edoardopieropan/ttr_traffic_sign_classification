@@ -6,7 +6,7 @@ from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import ImageDataGenerator
 
-def augment_data(img, quantity, zoom, brightness, flip):
+def augment_data(img, quantity, zoom, brightness):
     return_array = []
 
     if zoom:
@@ -44,11 +44,5 @@ def augment_data(img, quantity, zoom, brightness, flip):
             image = batch[0].astype('uint8')
             # add image to array
             return_array.append(numpy.asarray(image))
-
-    if flip:
-        open_cv_image = numpy.array(img) 
-        img = open_cv_image[:, :, ::-1].copy()
-        img = cv2.flip(img, 1)
-        return_array.append(numpy.asarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))
 
     return return_array

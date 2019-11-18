@@ -46,6 +46,10 @@ def predict_signal(signal, p2, frame):
         sample_image = sample_image.convert("RGB")
         b, g, r = sample_image.split()
         sample_image = Image.merge("RGB", (r, g, b))
+        basewidth = 50
+        wpercent = (basewidth/float(sample_image.size[0]))
+        hsize = int((float(sample_image.size[1])*float(wpercent)))
+        sample_image = sample_image.resize((basewidth, hsize), Image.ANTIALIAS) #resize delle immagini
         frame = Image.fromarray(frame)
         frame.paste(sample_image , p2)
         f = True

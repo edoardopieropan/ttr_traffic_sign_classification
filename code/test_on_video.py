@@ -12,7 +12,7 @@ from keras.applications.xception import preprocess_input as preprocess_xception
 
 model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='max')
 clf_classes = joblib.load('../utils/svm_model_classes.sav')
-pca = joblib.load('../utils/pca.sav')
+#pca = joblib.load('../utils/pca.sav')
 
 def create_tracker(n):
     tracker_types = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'CSRT']
@@ -74,6 +74,10 @@ def predict_signal(frame, bbox):
         sample_image = sample_image.convert("RGB")
         b, g, r = sample_image.split()
         sample_image = Image.merge("RGB", (r, g, b))
+        basewidth = 50
+        wpercent = (basewidth/float(sample_image.size[0]))
+        hsize = int((float(sample_image.size[1])*float(wpercent)))
+        sample_image = sample_image.resize((basewidth, hsize), Image.ANTIALIAS) #resize delle immagini
         frame = Image.fromarray(frame)
         frame.paste(sample_image , p2)
     else:
