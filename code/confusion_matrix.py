@@ -27,8 +27,10 @@ df_cm = pd.DataFrame(conf_mat, index = range(max(y_class)+1),
                   columns = range(max(y_class)+1))
 print('Confusion matrix:')
 print(conf_mat)
+accuracy = metrics.accuracy_score(y_class, y_pred)
+print("Accuracy: " + str(accuracy))
 plt.figure(figsize = (10,7))
-sn.heatmap(df_cm, annot=True, cmap="magma", fmt='g')
+sn.heatmap(df_cm, annot=True, cmap="Blues", fmt='g')
 plt.show()
 
 for i in range(max(y_class)+1):
@@ -40,3 +42,5 @@ for i in range(max(y_class)+1):
     conf_mat = confusion_matrix(y_temp, y_pred)
     print("Confusion matrix class "+str(i)+":")
     print(conf_mat)
+    accuracy = metrics.accuracy_score(y_temp, y_pred)
+    print("Accuracy: " + str(accuracy))
