@@ -1,7 +1,0 @@
-**/.DS_Store
-__pycache__
-utils/
-video/output_video.mp4
-confusion_matrix/
-sliding_windows_results/
-.gitignore
