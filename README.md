@@ -40,8 +40,8 @@ Visit <http://www.gnu.org/licenses/> for further information.<br >
 ## References
 
 ***Tecniche e teorie del riconoscimento - Visual Computing*** <br >
-A.Y. 2018/2019 <br >
-University of Verona (Italy) <br > <br >
-Repository Author: <br >
+University of Verona (Italy) <br >
+A.Y. 2018/2019 <br > <br >
+Repository Authors: <br >
 **Edoardo Pieropan** <br>
 **Gianluca Pavan**
