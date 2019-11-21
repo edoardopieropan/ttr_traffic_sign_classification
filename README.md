@@ -5,8 +5,13 @@ A simple Pattern Recognition project without using CNN methods. The traffic sign
 ## How it works
 We used multiple datasets for training our SVM model (<a href="https://www.kaggle.com/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign">German Traffic Sign Dataset</a>, <a href="https://btsd.ethz.ch/shareddata/">BelgiumTS Dataset</a>, <a href="https://daus-lab.github.io/spanish-traffic-sign-dataset/">Spanish Traffic Sign Dataset</a>). The sign images where not enough, so we used data augmentation (file in `code` folder named `data_augmentation`) in some cases.
 ## Setup & Run
-Download the repository then extract it. Using the `cd` command go to the repository path.
-You can now use `python3` to run the scripts contained in the `code` folder. <br>
+Download the repository then extract it. Using the `cd` command go to the repository path.<br>
+First of all install the requirements: 
+```
+pip install -r requirements.txt
+```
+You can now use `python3` to run the scripts contained in the `code` folder.<br>
+
 At first you need to extract the images contained in the `dataset` folder and convert it to `.npy` file. To do this simply run
 ```
 python3 code/export_dataset.py
