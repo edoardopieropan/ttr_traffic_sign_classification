@@ -4,3 +4,12 @@ utils/
 video/output_video.mp4	
 confusion_matrix/	
 sliding_windows_results/
+README.md
+code/confusion_matrix.py
+code/export_confusion_matrix.py
+.DS_Store
+code/__pycache__/
+confusion_matrix/
+requirements.txt
+utils/
+video/output_video.mp4

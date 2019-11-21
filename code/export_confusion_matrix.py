@@ -9,7 +9,9 @@ from sklearn import metrics
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
+from tabulate import tabulate
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
@@ -34,15 +36,19 @@ for c in clfs:
 
     print("Calculating cross validation score...")
     y_pred = cross_val_predict(clf, x, y_class, cv=5)
-    accuracy = metrics.accuracy_score(y_class, y_pred)
-    print("Accuracy: " + str(accuracy))
+
+    
     conf_mat = confusion_matrix(y_class, y_pred)
 
 
     df_cm = pd.DataFrame(conf_mat, index = range(max(y_class)+1),
                     columns = range(max(y_class)+1))
     print('Confusion matrix:')
-    print(conf_mat)
+    print(tabulate(conf_mat))
+    accuracy = metrics.accuracy_score(y_class, y_pred)
+    prec, rec, fscore, support = precision_recall_fscore_support(y_class, y_pred, average='macro')
+    print(tabulate([["Accuracy", accuracy],["Precision", prec],["Recall", rec],["Fscore", fscore]]))
+
     plt.clf()
     plt.title(titles[clfs.index(c)]+" classifier without PCA - superclasses")
     sn.heatmap(df_cm, annot=True, cmap="Blues", fmt='g')
@@ -59,15 +65,19 @@ for c in clfs:
         plt.title(titles[clfs.index(c)]+" classifier without PCA - class " + str(i))
         print("Calculating confusion matrix for class "+str(i)+"...")
         y_pred = cross_val_predict(clf, x_temp, y_temp, cv=5)
-        accuracy = metrics.accuracy_score(y_temp, y_pred)
-        print("Accuracy: " + str(accuracy))
+
+
         conf_mat = confusion_matrix(y_temp, y_pred)
 
         df_cm = pd.DataFrame(conf_mat, index = range(max(y_temp)-min(y_temp)+1),
                     columns = range(max(y_temp)-min(y_temp)+1))
 
         print("Confusion matrix class "+str(i)+":")
-        print(conf_mat)
+        print(tabulate(conf_mat))
+        accuracy = metrics.accuracy_score(y_temp, y_pred)
+        prec, rec, fscore, support = precision_recall_fscore_support(y_temp, y_pred, average='macro')
+        print(tabulate([["Accuracy", accuracy],["Precision", prec],["Recall", rec],["Fscore", fscore]]))
+
         plt.clf()
         plt.title(titles[clfs.index(c)]+" classifier without PCA - class " + str(i))
         sn.heatmap(df_cm, annot=True, cmap="Blues", fmt='g')
@@ -93,7 +103,11 @@ for c in clfs:
     df_cm = pd.DataFrame(conf_mat, index = range(max(y_class)+1),
                     columns = range(max(y_class)+1))
     print('Confusion matrix:')
-    print(conf_mat)
+    print(tabulate(conf_mat))
+    accuracy = metrics.accuracy_score(y_class, y_pred)
+    prec, rec, fscore, support = precision_recall_fscore_support(y_class, y_pred, average='macro')
+    print(tabulate([["Accuracy", accuracy],["Precision", prec],["Recall", rec],["Fscore", fscore]]))
+
     plt.clf()
     plt.title(titles[clfs.index(c)]+" classifier PCA - superclasses")
     sn.heatmap(df_cm, annot=True, cmap="Blues", fmt='g')
@@ -116,7 +130,11 @@ for c in clfs:
         df_cm = pd.DataFrame(conf_mat, index = range(max(y_temp)-min(y_temp)+1),
                     columns = range(max(y_temp)-min(y_temp)+1))
         print("Confusion matrix class "+str(i)+":")
-        print(conf_mat)
+        print(tabulate(conf_mat))
+        accuracy = metrics.accuracy_score(y_temp, y_pred)
+        prec, rec, fscore, support = precision_recall_fscore_support(y_temp, y_pred, average='macro')
+        print(tabulate([["Accuracy", accuracy],["Precision", prec],["Recall", rec],["Fscore", fscore]]))
+
         plt.clf()
         plt.title(titles[clfs.index(c)]+" classifier PCA - class " + str(i))
         sn.heatmap(df_cm, annot=True, cmap="Blues", fmt='g')
