@@ -21,8 +21,8 @@ y = np.load('../utils/labels_full.npy')
 y_class = np.load('../utils/class_labels_full.npy')
 cntr = 0
 titles = ['SVC', 'KNN']
-#clfs = [SVC(kernel="rbf", C=100, gamma='auto', probability=False), KNeighborsClassifier(n_neighbors=30) ]
-clfs = [SVC(kernel="rbf", C=100, gamma='auto', probability=False)]
+#clfs = [SVC(kernel="rbf", C=10, gamma='auto', probability=False), KNeighborsClassifier(n_neighbors=30) ]
+clfs = [SVC(kernel="rbf", C=10, gamma='auto', probability=False)]
 plt.figure(figsize = (10,7))
 
 if not os.path.exists('../confusion_matrix/'):
