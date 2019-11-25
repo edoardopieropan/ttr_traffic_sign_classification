@@ -1,5 +1,6 @@
 '''
-Salvataggio del dataset in label e immagini in formato npy
+Saves images and labels in .npy
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
 '''
 
 import os

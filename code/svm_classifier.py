@@ -1,5 +1,6 @@
 '''
-Creazione, training e salvataggio di un classificatore SVM.
+Train a new SVM classifier
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
 '''
 
 import numpy as np

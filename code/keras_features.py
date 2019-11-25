@@ -1,5 +1,6 @@
 '''
-Estrazione delle feature usando Keras. Il modello utilizzato è Xception preaddestrato con ImageNet.
+Feature extraction with Keras Xception application
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
 '''
 
 import os

@@ -1,3 +1,7 @@
+'''
+Test on images
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
+'''
 import cv2
 import numpy as np
 from PIL import Image

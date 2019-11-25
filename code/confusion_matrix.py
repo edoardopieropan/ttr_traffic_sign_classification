@@ -1,3 +1,7 @@
+'''
+Print confusion matrix, accuracy, precision and recall values for the classifier trained in svm_classifier.py
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
+'''
 import numpy as np
 import pandas as pd
 import seaborn as sn

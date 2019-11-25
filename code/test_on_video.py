@@ -1,5 +1,6 @@
 '''
-Prova video con classi predette.
+Testing on video
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
 '''
 
 import cv2

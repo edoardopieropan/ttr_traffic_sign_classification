@@ -1,7 +1,7 @@
 '''
-Permette il savataggio delle bounding-box dal video. L'aggiunta di una bbox si effettua premendo il tasto 'n'.
+Let you save a new bounding box for a specific video. For add a new bbox press 'n' button while streaming.
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
 '''
-
 import cv2
 import sys
 

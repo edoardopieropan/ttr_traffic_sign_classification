@@ -1,3 +1,7 @@
+'''
+Saves confusion matrix training new classifiers. Used for comparisons.
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
+'''
 import numpy as np
 import pandas as pd
 import seaborn as sn

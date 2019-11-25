@@ -1,3 +1,6 @@
+'''
+Needed for sliding windows
+'''
 # import the necessary packages
 import imutils
 

@@ -1,4 +1,8 @@
-# DATA AUGMENTATION
+'''
+Let you augment an image.
+Partially taken: https://machinelearningmastery.com/how-to-configure-image-data-augmentation-when-training-deep-learning-neural-networks/
+Copyright 2019, Pieropan Edoardo and Pavan Gianluca, All rights reserved.
+'''
 import cv2
 import numpy
 from numpy import expand_dims
