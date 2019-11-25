@@ -3,7 +3,7 @@
 A simple Pattern Recognition project without using CNN methods. The traffic signs we work on are the following.
 ![signs classes](other/classes.jpg)
 ## How it works
-We used multiple datasets for training our SVM model (<a href="https://www.kaggle.com/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign">German Traffic Sign Dataset</a>, <a href="https://btsd.ethz.ch/shareddata/">BelgiumTS Dataset</a>, <a href="https://daus-lab.github.io/spanish-traffic-sign-dataset/">Spanish Traffic Sign Dataset</a>). The sign images where not enough, so we used data augmentation (file in `code` folder named `data_augmentation`) in some cases.
+Most of the dataset is based on <a href="https://www.kaggle.com/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign">German Traffic Sign Dataset</a>, <a href="https://btsd.ethz.ch/shareddata/">BelgiumTS Dataset</a>, <a href="https://daus-lab.github.io/spanish-traffic-sign-dataset/">Spanish Traffic Sign Dataset</a>. We also used data augmentation, file in `code` folder named `data_augmentation`, to exapand to 600 per class the images. The feature we used are from __Keras__ application.
 ## Setup & Run
 Download the repository then extract it. Using the `cd` command go to the repository path.<br>
 First of all install the requirements: 
@@ -38,8 +38,10 @@ Finally it will save the output video inside the `video` folder as `output_video
 Another test is `test_on_images.py` that will cicle into the `test` folder and find the signals using a __sliding window__. Results will be stored in the folder `sliding_windows_results`.
 
 ## License
-Before use it I invite you to read the LICENSE <br >
+Before use it we invite you to read the LICENSE.<br >
+
 This file is distributed under the terms of the __GNU General Public License v3.0__<br >
+Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. __Copyright and license notices must be preserved__. Contributors provide an express grant of patent rights.<br><hr>
 Visit <http://www.gnu.org/licenses/> for further information.<br >
 
 ## References
