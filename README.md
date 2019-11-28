@@ -1,4 +1,4 @@
-#  __Traffic Sign Classification__ [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/edoardopieropan/ttr_traffic_sign_classification/edit/master/LICENSE)
+#  __Traffic Sign Classification__ [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/edoardopieropan/ttr_traffic_sign_classification/edit/master/LICENSE)
 ### __University of Verona__
 A simple Pattern Recognition project without using CNN methods. The traffic signs we work on are the following.
 ![signs classes](other/classes.jpg)
