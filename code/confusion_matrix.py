@@ -27,7 +27,7 @@ y_class = np.load('../utils/class_labels_full.npy')
 # x = pca.transform(x)
 
 print("Calculating cross validation score...")
-y_pred = cross_val_predict(clf, x, y_class, cv=2)
+y_pred = cross_val_predict(clf, x, y_class, cv=5)
 conf_mat = confusion_matrix(y_class, y_pred)
 import seaborn as sn
 import pandas as pd
