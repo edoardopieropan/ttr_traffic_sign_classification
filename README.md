@@ -5,7 +5,13 @@ A simple Pattern Recognition project without using CNN methods. The traffic sign
 ## How it works
 Most of the dataset is based on <a href="https://www.kaggle.com/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign">German Traffic Sign Dataset</a>, <a href="https://btsd.ethz.ch/shareddata/">BelgiumTS Dataset</a>, <a href="https://daus-lab.github.io/spanish-traffic-sign-dataset/">Spanish Traffic Sign Dataset</a>. We also used data augmentation, file in `code` folder named `data_augmentation`, to exapand to 600 per class the images. The feature we used are from __Keras__ application.
 ## Setup & Run
-Download the repository then extract it. Using the `cd` command go to the repository path.<br>
+Download the repository then extract it.<br >
+You can simply run the bash script that will perform the first three time consuming steps.
+```
+bash autorun.sh
+```
+__or__ follow the commands below for a step by step approach.<br >
+Using the `cd` command go to the repository path.<br>
 First of all install the requirements: 
 ```
 pip install -r requirements.txt
