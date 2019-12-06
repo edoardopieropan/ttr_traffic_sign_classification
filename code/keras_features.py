@@ -12,7 +12,7 @@ from keras.applications.xception import preprocess_input as preprocess_xception
 x_train = np.load('../utils/images_full.npy', allow_pickle=True)
 
 x_train_features = []
-model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='avg')
+model = Xception(include_top=False, weights='imagenet', input_tensor=None, input_shape=None, pooling='max')
 
 print("\nExtracting features...")
 for i in tqdm(x_train):
