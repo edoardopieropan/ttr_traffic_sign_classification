@@ -9,5 +9,5 @@ tabulate==0.8.6
 opencv_contrib_python==4.1.1.26
 imutils==0.5.3
 joblib==0.13.2
-Pillow==6.2.1
+Pillow==7.1.0
 scikit_learn==0.21.3
